@@ -20,7 +20,10 @@
 </template>
 
 <script>
+
+import "milligram";
 export default {
+
   name: 'app',
   data () {
     return {
@@ -41,6 +44,8 @@ export default {
 }
 </script>
 
+
+  
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
