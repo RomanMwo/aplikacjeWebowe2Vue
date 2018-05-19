@@ -1,22 +1,22 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+
+<div id="app">
+  <div id = "beforeLogin" v-if="!isAuthentication">
+    <h1> WItaj w systemie zapisu na zajecia !!!</h1>
+    <h1>Twoj e-mail to: {{ email }}</h1>
+    <div v-if="email.length < 10">Ale masz krótki adres!</div>
+    <div v-else-if="email.length < 15">Twój adres e-mail jest w sam raz.</div>
+    <div v-else>Twój adres e-mail jest stanowczo za długi.</div>
+    <input type="email" v-model="email">
+    <button :disabled = "email.length < 10" @click="toogle()">Wchodze</button>
+
   </div>
+  <div v-else>
+   <h2>Zalogowany jako {{email}}</h2>
+    <button @click = "toogle()"> Wyloguj </button>
+  </div>
+
+</div>
 </template>
 
 <script>
@@ -24,7 +24,18 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Hello World!!!'
+      email: '',
+      isAuthentication: false
+
+    }
+  }
+,
+ methods: {
+  alertMyEmail(){
+    alert(this.email);
+    },
+    toogle(){
+       this.isAuthentication = !this.isAuthentication;
     }
   }
 }
@@ -44,17 +55,6 @@ h1, h2 {
   font-weight: normal;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
 
-a {
-  color: #42b983;
-}
 </style>
